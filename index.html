@@ -1,9 +1,261 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brandon Stevison — Analytics Engineering Portfolio</title>
+<meta name="description" content="Solo-built, production-deployed, measured. ToBeWatched, Chain The Rainbow, and quantitative analytics tooling by Brandon Stevison.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Condensed:wght@600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FAFAF6;
+    --grid:#E6E8E1;
+    --ink:#191C1A;
+    --slate:#5A6461;
+    --accent:#D64E17;      /* test-range orange */
+    --accent-soft:#F6DCCF;
+    --rule:#C9CCC3;
+    --maxw:1060px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} .reveal{transition:none !important; opacity:1 !important; transform:none !important} }
+  body{
+    background-color:var(--paper);
+    background-image:
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size:28px 28px;
+    color:var(--ink);
+    font-family:'IBM Plex Sans',system-ui,sans-serif;
+    font-size:16px;line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+  .mono{font-family:'IBM Plex Mono',monospace}
+  a{color:var(--ink)}
+  a:focus-visible, button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+
+  /* ---------- header ---------- */
+  header{padding:64px 0 40px;border-bottom:2px solid var(--ink);background:linear-gradient(to bottom, rgba(250,250,246,0) 0%, rgba(250,250,246,.6) 100%)}
+  .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.14em;color:var(--slate);text-transform:uppercase;margin-bottom:18px}
+  .eyebrow b{color:var(--accent);font-weight:500}
+  h1{font-family:'IBM Plex Sans Condensed',sans-serif;font-weight:700;font-size:clamp(40px,7vw,72px);line-height:.98;letter-spacing:-.01em;text-transform:uppercase}
+  .thesis{max-width:620px;margin-top:22px;font-size:18px;color:var(--ink)}
+  .thesis em{font-style:normal;background:linear-gradient(transparent 62%, var(--accent-soft) 62%)}
+  .header-grid{display:flex;justify-content:space-between;align-items:flex-end;gap:40px;flex-wrap:wrap}
+  .index{font-family:'IBM Plex Mono',monospace;font-size:13px;line-height:2.1;color:var(--slate);min-width:230px}
+  .index a{text-decoration:none;color:var(--slate);display:block;border-bottom:1px solid transparent}
+  .index a:hover{color:var(--accent)}
+  .index .num{color:var(--accent);margin-right:10px}
+
+  /* ---------- project sections ---------- */
+  .proj{padding:64px 0 56px;border-bottom:1px solid var(--rule)}
+  .proj-head{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;margin-bottom:6px}
+  .proj-num{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--accent);letter-spacing:.1em}
+  h2{font-family:'IBM Plex Sans Condensed',sans-serif;font-weight:700;font-size:clamp(26px,3.6vw,38px);text-transform:uppercase;letter-spacing:.005em}
+  .role-line{font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--slate);margin-bottom:26px}
+  .role-line a{color:var(--accent);text-decoration-thickness:1px;text-underline-offset:3px}
+  .proj-body{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:48px;align-items:start}
+  @media (max-width:820px){ .proj-body{grid-template-columns:1fr} }
+  .proj-copy p{margin-bottom:14px}
+  .proj-copy p b{font-weight:600}
+  .stack{margin-top:18px;display:flex;flex-wrap:wrap;gap:8px}
+  .chip{font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--slate);border:1px solid var(--rule);background:rgba(255,255,255,.55);padding:3px 9px;border-radius:2px}
+
+  /* metric strip = the signature */
+  .metric-card{border:1px solid var(--ink);background:rgba(255,255,255,.72);padding:20px 20px 16px;position:relative}
+  .metric-card::before{content:attr(data-label);position:absolute;top:-9px;left:14px;background:var(--paper);padding:0 8px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+  .metric-card svg{width:100%;height:auto;display:block}
+  .metric-note{font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--slate);margin-top:12px;line-height:1.6}
+  .stats-row{display:flex;flex-wrap:wrap;gap:0;margin-top:20px;border-top:1px solid var(--rule)}
+  .stat{padding:12px 22px 0 0;margin-right:22px}
+  .stat .v{font-family:'IBM Plex Sans Condensed',sans-serif;font-weight:700;font-size:26px;line-height:1.1}
+  .stat .k{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--slate)}
+
+  .reveal{opacity:0;transform:translateY(10px);transition:opacity .5s ease, transform .5s ease}
+  .reveal.in{opacity:1;transform:none}
+
+  /* ---------- footer ---------- */
+  footer{padding:56px 0 72px}
+  footer .cta{font-family:'IBM Plex Sans Condensed',sans-serif;font-weight:700;font-size:clamp(22px,3vw,30px);text-transform:uppercase;margin-bottom:14px}
+  .contact{font-family:'IBM Plex Mono',monospace;font-size:13.5px;line-height:2.2}
+  .contact a{color:var(--ink);text-decoration-color:var(--accent);text-decoration-thickness:1.5px;text-underline-offset:4px}
+  .fineprint{margin-top:28px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--slate)}
+</style>
+</head>
 <body>
-<h1>Testing Haiku</h1>
-<p>I'm trying to think</p>
-<p>what even is programming</p>
-<p>Flux Pavilion, stop</p>
+
+<header>
+  <div class="wrap">
+    <p class="eyebrow">Orlando, FL &nbsp;·&nbsp; <b>telemetry &rarr; decisions</b> &nbsp;·&nbsp; systems &amp; analytics engineering</p>
+    <div class="header-grid">
+      <div>
+        <h1>Brandon<br>Stevison</h1>
+        <p class="thesis">Fifteen years reading high-rate sensor telemetry for defense test programs. Nights and weekends: shipping consumer products and <em>measuring how people actually use them</em>. Everything below was designed, built, deployed, instrumented, and analyzed by one person.</p>
+      </div>
+      <nav class="index" aria-label="Project index">
+        <a href="#tobewatched"><span class="num">01</span>ToBeWatched</a>
+        <a href="#chaintherainbow"><span class="num">02</span>Chain The Rainbow</a>
+        <a href="#fusion"><span class="num">03</span>Sensor-Fusion Explorer</a>
+        <a href="#contact"><span class="num">&rarr;</span>Contact / Resume</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<!-- ============ 01 TOBEWATCHED ============ -->
+<section class="proj reveal" id="tobewatched">
+  <div class="wrap">
+    <div class="proj-head"><span class="proj-num">01</span><h2>ToBeWatched</h2></div>
+    <p class="role-line">Founder &amp; sole engineer · full-stack film &amp; TV platform · <a href="https://tobewatched.com">tobewatched.com</a></p>
+    <div class="proj-body">
+      <div class="proj-copy">
+        <p>A film and TV watchlist + social platform — a Letterboxd alternative with full series/season tracking, event-sourced watch history, threaded reviews, and <b>region-aware streaming availability</b> computed against each viewer's country and subscribed services.</p>
+        <p><b>Built solo, first commit to production in six weeks.</b> Python/FastAPI + async SQLAlchemy + PostgreSQL, React frontend, Capacitor Android app, Docker/Caddy deployment with tiered automated backups. 75+ REST endpoints, ~20 zero-data-loss schema migrations against a live database.</p>
+        <p>The best stories came after launch: users importing 2,000+ film libraries exposed a first-traffic incident (retry storms, connection-pool starvation) diagnosed and fixed in one pass; a ratings-provider circuit breaker that treated "unknown film" as an outage and silently poisoned nightly refreshes; and a fixture suite that passed while real-world imports failed — because real Letterboxd exports don't look like synthetic ones.</p>
+        <div class="stack">
+          <span class="chip">Python · FastAPI</span><span class="chip">PostgreSQL</span><span class="chip">SQLAlchemy async</span><span class="chip">React</span><span class="chip">TMDB + 4 more APIs</span><span class="chip">Docker · Caddy</span>
+        </div>
+      </div>
+      <div>
+        <div class="metric-card" data-label="Measured · list load time">
+          <!-- honest before/after latency bars -->
+          <svg viewBox="0 0 420 150" role="img" aria-label="List load time reduced from 7.2 seconds to 1.2 seconds, 0.18 seconds warm">
+            <g font-family="IBM Plex Mono, monospace" font-size="11" fill="#5A6461">
+              <text x="0" y="26">v1 · 2,300-item list</text>
+              <text x="0" y="70">optimized</text>
+              <text x="0" y="114">warm cache</text>
+            </g>
+            <rect x="150" y="14" width="252" height="16" fill="#D64E17" opacity="0.28"/>
+            <rect x="150" y="58" width="42" height="16" fill="#D64E17"/>
+            <rect x="150" y="102" width="7" height="16" fill="#191C1A"/>
+            <g font-family="IBM Plex Mono, monospace" font-size="11.5" fill="#191C1A">
+              <text x="150" y="44">7.2 s · 1.8 MB JSON</text>
+              <text x="200" y="70">1.2 s</text>
+              <text x="165" y="114">0.18 s</text>
+            </g>
+            <line x1="150" y1="6" x2="150" y2="126" stroke="#C9CCC3" stroke-width="1"/>
+            <text x="150" y="144" font-family="IBM Plex Mono, monospace" font-size="10" fill="#5A6461">deferred hydration · per-region cache · proxy compression · progressive load</text>
+          </svg>
+          <p class="metric-note">First fix attempt moved 190&nbsp;MB of JSONB parsing into Postgres. Benchmarking at scale is the lesson.</p>
+        </div>
+        <div class="stats-row">
+          <div class="stat"><div class="v">6 wk</div><div class="k">idea &rarr; prod</div></div>
+          <div class="stat"><div class="v">75+</div><div class="k">endpoints</div></div>
+          <div class="stat"><div class="v">5</div><div class="k">external APIs</div></div>
+          <div class="stat"><div class="v">1</div><div class="k">engineer</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 02 CHAIN THE RAINBOW ============ -->
+<section class="proj reveal" id="chaintherainbow">
+  <div class="wrap">
+    <div class="proj-head"><span class="proj-num">02</span><h2>Chain The Rainbow</h2></div>
+    <p class="role-line">Solo developer · live on Google Play, iOS in TestFlight · Flutter / Flame / Firebase</p>
+    <div class="proj-body">
+      <div class="proj-copy">
+        <p>A cross-platform arcade puzzle game shipped solo through <b>seven production releases</b> — eight game modes, real-time global leaderboards, anonymous-first auth, rewarded ads + IAP monetization, and the full store presence (listings, screenshot sets, ad creatives, a playable ad).</p>
+        <p>The analytics work is the point. A <b>deliberately small custom event taxonomy</b> — designed backwards from the questions a paid-UA campaign needs answered — feeds a Firebase &rarr; <b>BigQuery export for SQL-level cohort, retention, and funnel analysis</b>. Rounds are timed from first tap, not screen-open, so engagement numbers measure play, not navigation.</p>
+        <p>Review-prompt timing was <b>iteratively tuned from player behavior</b>: the naive v1 trigger asked new players for a rating mid-onboarding; the fix gates asks to celebratory moments with per-mode-family thresholds, behind a soft-ask layer that makes the funnel measurable despite the deliberately opaque native review API. Paid UA on Google Ads surfaced ~80% install concentration in South Asia at low CPI — which reshaped the follow-up Tier-1 geo strategy.</p>
+        <div class="stack">
+          <span class="chip">Flutter · Flame</span><span class="chip">Firebase Analytics</span><span class="chip">BigQuery</span><span class="chip">AdMob · IAP</span><span class="chip">Google Ads UA</span>
+        </div>
+      </div>
+      <div>
+        <div class="metric-card" data-label="Instrumented · rewarded-ad rescue funnel">
+          <svg viewBox="0 0 420 168" role="img" aria-label="Diagram of the rewarded ad rescue funnel: game over, predictive gate, offer, then watched or declined, all instrumented as events">
+            <g font-family="IBM Plex Mono, monospace" font-size="11" fill="#191C1A">
+              <rect x="4" y="10" width="106" height="30" fill="none" stroke="#191C1A"/><text x="16" y="29">game over</text>
+              <rect x="150" y="10" width="126" height="30" fill="#F6DCCF" stroke="#D64E17"/><text x="160" y="29">predictive gate</text>
+              <rect x="316" y="10" width="100" height="30" fill="none" stroke="#191C1A"/><text x="330" y="29">offer</text>
+              <rect x="316" y="76" width="100" height="30" fill="none" stroke="#191C1A"/><text x="332" y="95">watched</text>
+              <rect x="316" y="126" width="100" height="30" fill="none" stroke="#191C1A"/><text x="330" y="145">declined</text>
+              <rect x="150" y="76" width="126" height="30" fill="none" stroke="#C9CCC3"/><text x="162" y="95" fill="#5A6461">no offer</text>
+            </g>
+            <g stroke="#191C1A" stroke-width="1.2" fill="none">
+              <line x1="110" y1="25" x2="148" y2="25"/><line x1="276" y1="25" x2="314" y2="25"/>
+              <line x1="366" y1="40" x2="366" y2="74"/><line x1="366" y1="106" x2="366" y2="124"/>
+            </g>
+            <line x1="213" y1="40" x2="213" y2="74" stroke="#C9CCC3" stroke-width="1.2"/>
+            <g font-family="IBM Plex Mono, monospace" font-size="9.5" fill="#D64E17">
+              <text x="152" y="56">offers only when a boost</text>
+              <text x="152" y="68">would flip the outcome</text>
+            </g>
+          </svg>
+          <p class="metric-note">Every edge is an event (offered / watched / declined) — offer quality and conversion are measured, not guessed.</p>
+        </div>
+        <div class="stats-row">
+          <div class="stat"><div class="v">7</div><div class="k">releases live</div></div>
+          <div class="stat"><div class="v">8</div><div class="k">game modes</div></div>
+          <div class="stat"><div class="v">SQL</div><div class="k">BigQuery export</div></div>
+          <div class="stat"><div class="v">[X]</div><div class="k">installs — fill in</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 03 SENSOR-FUSION EXPLORER ============ -->
+<section class="proj reveal" id="fusion">
+  <div class="wrap">
+    <div class="proj-head"><span class="proj-num">03</span><h2>Sensor-Fusion Explorer</h2></div>
+    <p class="role-line">Interactive analytics tooling · Plotly Dash · methods demo — no program data</p>
+    <div class="proj-body">
+      <div class="proj-copy">
+        <p>A Plotly Dash application for exploring <b>target-position uncertainty when two platforms observe the same object</b>: azimuth/elevation/range measurements transformed to Cartesian with <b>Jacobian covariance propagation</b>, fused via <b>Julier&ndash;Uhlmann covariance intersection</b> with Mahalanobis-distance gating, and rendered as interactive uncertainty ellipsoids on a drag-to-position map.</p>
+        <p>Representative of the day-job work: <b>quick-turn analysis of 100&ndash;1,000&nbsp;Hz instrumentation streams</b> to support same-day field-test decisions, and pre-event dashboards that let non-specialists interrogate an algorithm before committing range time to it. Shown here as a pure-methods demonstration with synthetic geometry.</p>
+        <div class="stack">
+          <span class="chip">Python · Dash · Plotly</span><span class="chip">NumPy linear algebra</span><span class="chip">WGS-84 / NED frames</span><span class="chip">Covariance intersection</span>
+        </div>
+      </div>
+      <div>
+        <div class="metric-card" data-label="Method · covariance intersection">
+          <svg viewBox="0 0 420 160" role="img" aria-label="Two overlapping uncertainty ellipses from separate sensors fuse into a smaller combined ellipse">
+            <ellipse cx="150" cy="80" rx="118" ry="46" transform="rotate(-18 150 80)" fill="none" stroke="#5A6461" stroke-width="1.3" stroke-dasharray="5 4"/>
+            <ellipse cx="235" cy="80" rx="112" ry="52" transform="rotate(24 235 80)" fill="none" stroke="#5A6461" stroke-width="1.3" stroke-dasharray="5 4"/>
+            <ellipse cx="192" cy="80" rx="58" ry="30" transform="rotate(4 192 80)" fill="#F6DCCF" stroke="#D64E17" stroke-width="2"/>
+            <circle cx="192" cy="80" r="2.6" fill="#191C1A"/>
+            <g font-family="IBM Plex Mono, monospace" font-size="10.5" fill="#5A6461">
+              <text x="26" y="24">sensor A estimate</text>
+              <text x="300" y="150">sensor B estimate</text>
+            </g>
+            <text x="152" y="132" font-family="IBM Plex Mono, monospace" font-size="10.5" fill="#D64E17">fused (CI)</text>
+          </svg>
+          <p class="metric-note">Consistent fusion without knowing cross-correlation — the conservative answer when sensors share unknown error sources.</p>
+        </div>
+        <div class="stats-row">
+          <div class="stat"><div class="v">100&ndash;1k</div><div class="k">Hz streams</div></div>
+          <div class="stat"><div class="v">Same-day</div><div class="k">field decisions</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <p class="cta">Build the instrument. Read the gauges.</p>
+    <p class="contact">
+      <a href="mailto:brandonstevison@gmail.com">brandonstevison@gmail.com</a><br>
+      <a href="https://github.com/YOUR_GITHUB_USERNAME">github.com/YOUR_GITHUB_USERNAME</a><br>
+      <a href="Brandon_Stevison_Resume_2026.pdf">Resume (PDF)</a> &nbsp;·&nbsp; <a href="https://tobewatched.com">tobewatched.com</a>
+    </p>
+    <p class="fineprint">Principal Systems Architect, DICE Defense · M.S. Operations Research, UAH · Orlando, FL</p>
+  </div>
+</footer>
+
+<script>
+  // gentle scroll reveal; disabled automatically under prefers-reduced-motion via CSS
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
 </body>
 </html>
