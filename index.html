@@ -75,6 +75,13 @@
   .stat .v{font-family:'IBM Plex Sans Condensed',sans-serif;font-weight:700;font-size:26px;line-height:1.1}
   .stat .k{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--slate)}
 
+  /* product screenshots */
+  .shot-wrap{margin:0 0 34px}
+  .shot{display:block;width:100%;height:auto;border:1px solid var(--ink);background:#0E1113}
+  .shot-cap{font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--slate);margin-top:10px;line-height:1.6}
+  .shot-phone{max-width:300px;margin:0 auto 22px}
+  .shot-phone .shot{border-radius:6px}
+
   .reveal{opacity:0;transform:translateY(10px);transition:opacity .5s ease, transform .5s ease}
   .reveal.in{opacity:1;transform:none}
 
@@ -111,6 +118,11 @@
   <div class="wrap">
     <div class="proj-head"><span class="proj-num">01</span><h2>ToBeWatched</h2></div>
     <p class="role-line">Founder &amp; sole engineer · full-stack film &amp; TV platform · <a href="https://tobewatched.com">tobewatched.com</a></p>
+    <figure class="shot-wrap">
+      <img class="shot" src="images/tobewatched-film-page.jpg" width="1282" height="1278" loading="lazy"
+           alt="ToBeWatched film page for Kramer vs. Kramer showing six aggregated rating sources, cast and crew links, watchlist actions, watch-history logging, reviews, and a region-aware Where to Watch section">
+      <figcaption class="shot-cap">Film page in production: six aggregated rating sources (TMDB, IMDb, Rotten Tomatoes critic + audience, Metacritic, Letterboxd), watchlist / watched actions, per-user watch-history logging, reviews, and the region-aware "Where to Watch" section computed for the viewer's country.</figcaption>
+    </figure>
     <div class="proj-body">
       <div class="proj-copy">
         <p>A film and TV watchlist + social platform — a Letterboxd alternative with full series/season tracking, event-sourced watch history, threaded reviews, and <b>region-aware streaming availability</b> computed against each viewer's country and subscribed services.</p>
@@ -168,6 +180,10 @@
         </div>
       </div>
       <div>
+        <figure class="shot-wrap shot-phone">
+          <img class="shot" src="images/chain-the-rainbow-one-tap.png" width="1080" height="1920" loading="lazy"
+               alt="Chain The Rainbow store screenshot: a cascade of overlapping colored pop rings with rising score multipliers, captioned One Tap, Endless Chains">
+        </figure>
         <div class="metric-card" data-label="Instrumented · rewarded-ad rescue funnel">
           <svg viewBox="0 0 420 168" role="img" aria-label="Diagram of the rewarded ad rescue funnel: game over, predictive gate, offer, then watched or declined, all instrumented as events">
             <g font-family="IBM Plex Mono, monospace" font-size="11" fill="#191C1A">
@@ -194,7 +210,7 @@
           <div class="stat"><div class="v">7</div><div class="k">releases live</div></div>
           <div class="stat"><div class="v">8</div><div class="k">game modes</div></div>
           <div class="stat"><div class="v">SQL</div><div class="k">BigQuery export</div></div>
-          <div class="stat"><div class="v">10000+</div><div class="k">installs and growing</div></div>
+          <div class="stat"><div class="v">[X]</div><div class="k">installs — fill in</div></div>
         </div>
       </div>
     </div>
@@ -243,7 +259,7 @@
     <p class="cta">Build the instrument. Read the gauges.</p>
     <p class="contact">
       <a href="mailto:brandonstevison@gmail.com">brandonstevison@gmail.com</a><br>
-      <a href="https://github.com/jbs0001">github.com/jbs0001</a><br>
+      <a href="https://github.com/YOUR_GITHUB_USERNAME">github.com/YOUR_GITHUB_USERNAME</a><br>
       <a href="Brandon_Stevison_Resume_2026.pdf">Resume (PDF)</a> &nbsp;·&nbsp; <a href="https://tobewatched.com">tobewatched.com</a>
     </p>
     <p class="fineprint">Principal Systems Architect, DICE Defense · M.S. Operations Research, UAH · Orlando, FL</p>
